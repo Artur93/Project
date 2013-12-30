@@ -16,7 +16,10 @@ if (!empty($firstname) || !empty($lastname) || !empty($country) || !empty($city)
 
 $operation = mysql_query("INSERT INTO address (firstname, lastname, country,city,address,telephone) VALUES ( '$firstname','$lastname','$country','$city','$address','$telephone') ") or die (mysql_error($connect));
 
-echo '1';
+$mysql_last = mysql_query("select * from address  order by id desc") or die (mysql_error($connect));
+$last_id = mysql_fetch_row($mysql_last);
+
+echo $last_id[0];
 
 }
  
