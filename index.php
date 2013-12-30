@@ -70,25 +70,23 @@ body{
 <th>City</th>
 <th>Address</th>
 <th>Telephone</th>
+<th>martva</th>
 </tr>
 
-<tr>
-	<td colspan="6">
-		<table class="append">
-		</table>
-	</td>
-</tr>
+
 
 <?php $mysql_bazis_seleqti=mysql_query("select * from address");
 		while($mysql_gamotana = mysql_fetch_row($mysql_bazis_seleqti)){
 ?>
-<tr>
+<tr id="tr_<?php echo $mysql_gamotana[0];?>">
 	<?php echo '<td>'.$mysql_gamotana[0].'</td>'; ?>
 	<?php echo '<td>'.$mysql_gamotana[1].'</td>'; ?>
 	<?php echo '<td>'.$mysql_gamotana[2].'</td>'; ?>
 	<?php echo '<td>'.$mysql_gamotana[3].'</td>'; ?>
 	<?php echo '<td>'.$mysql_gamotana[4].'</td>'; ?>
 	<?php echo '<td>'.$mysql_gamotana[5].'</td>'; ?>
+	<?php echo '<td>'.$mysql_gamotana[6].'</td>'; ?>
+	<td ><input type="submit" value="washla" class="delete" id="<?php echo $mysql_gamotana[0]; ?>" /></td>
 </tr>
 <?php	}	?>
 
