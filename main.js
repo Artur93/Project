@@ -1,4 +1,20 @@
 $(function(){
+	
+	var $submit = $(".form_submit"),
+		$inputs= $("input[type=text]");
+
+		
+		function carieli(){
+			
+			
+				return $inputs.filter(function(){
+					return !$.trim(this.value);
+				}).length ===0;
+		}
+		
+		$inputs.on('keyup', function(){
+			$submit.prop("disabled", !carieli());
+		}).keyup();
 
 $('.form_submit').click(function(){
 
@@ -20,9 +36,9 @@ $.ajax({
 	data: form_data,
 	success: function(msg) {
 		
-		if(msg==1){
+		if(msg>0){
 		
-			$('.append').append('<tr><td>'+$('#fname').val()+'</td><td>'+$('#lname').val()+'</td><td>'+$('#cnt').val()+'</td><td>'+$('#ct').val()+'<td>'+$('#adr').val()+'<td>'+$('#tel').val()+'</td></tr>');
+			$('.table tr:first').after('<tr id="tr_'+msg+'"><td>'+msg+'</td><td>'+$('#fname').val()+'</td><td>'+$('#lname').val()+'</td><td>'+$('#cnt').val()+'</td><td>'+$('#ct').val()+'<td>'+$('#adr').val()+'<td>'+$('#tel').val()+'</td><td><input type="submit" value="washla" class="delete" id="'+msg+'"></td></tr>');
 		
 		
 		}	 else{
@@ -34,6 +50,36 @@ $.ajax({
 	}
 });
 
+});
+
+$('.delete').live({click:function(){
+var id = $(this).attr('id');
+	
+	var form_data = {
+id : id
+};
+
+
+$.ajax({
+	url: "delete.php",
+	type: 'POST',
+	async : false,
+	data: form_data,
+	success: function(msg) {
+		
+		if(msg==1){
+		
+		$('#tr_'+id).remove();
+		
+		}	 else{
+			alert('ar waishala!');
+		}
+		
+		
+		
+	}
+});
+}
 });
 	
 });
